@@ -1,0 +1,40 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Search Result!
+  </h1>
+</div>
+<ul >
+  <table class="table" >
+    <tr>
+      <th>the city name</th>
+      <th> the temperature</th>
+      <th> the maximum temperature</th>
+      <th>the minimum temperature</th>
+      <th>icon temperature</th>
+    </tr>
+  </table>
+  <ng-container *ngIf="weatherData.length" >
+    <ng-container *ngFor="let kw of weatherData" >
+      <weather-module
+        [woeid]="kw.woeid"
+        [keyword]="weatherService.keyword"
+      >
+
+      </weather-module>
+    </ng-container>
+  </ng-container>
+</ul>
+<div style="text-align:center">
+  <loader
+    *ngIf="!notResult"
+    [dataCount] = '(weatherData.length)?weatherData.length:1'
+    tagName = "weatherData"
+  >
+
+  </loader>
+  <p *ngIf="notResult">
+    No results were found. Try changing the keyword!
+  </p>
+</div>
+

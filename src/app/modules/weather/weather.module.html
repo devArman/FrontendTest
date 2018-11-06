@@ -1,0 +1,14 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<table class="table"   *ngIf="weatherData">
+
+  <tr (click)="redirectToWeather(woeid)" class="weatherData">
+    <td>{{weatherData.title}}</td>
+    <td>{{weatherData.consolidated_weather.minTemp() | number :'1.0-0' }}°c</td>
+    <td>{{weatherData.consolidated_weather.maxTemp()   | number:'1.0-0' }}°c</td>
+    <td>{{weatherData.consolidated_weather.theTemp() | number:'1.0-0' }}°c</td>
+    <td>
+      <img [src]="weatherService.iconUrl + weatherData.consolidated_weather.theTempIcon()" alt="" style="width:32px">
+    </td>
+  </tr>
+
+</table>

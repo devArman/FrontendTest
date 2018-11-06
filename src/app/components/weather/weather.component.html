@@ -1,0 +1,50 @@
+<div style="text-align:center">
+  <h1>
+   Weather!
+  </h1>
+</div>
+<ul>
+  <table class="table" >
+    <tr>
+      <th>the city name</th>
+      <th> the temperature</th>
+      <th> the maximum temperature</th>
+      <th>the minimum temperature</th>
+      <th>icon temperature</th>
+    </tr>
+  </table>
+  <weather-module
+    [woeid]="woeid"
+    (getConsolidatedWeather)="getConsolidatedWeather($event)"
+  >
+
+  </weather-module>
+  <table class="table"   *ngIf="consolidatedWeather.length">
+
+    <thead>
+      <tr>
+        <th>day of week</th>
+        <th> the temperature</th>
+        <th> the maximum temperature</th>
+        <th>the minimum temperature</th>
+        <th>icon temperature</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let cons of consolidatedWeather" class="weatherData">
+      <td>{{cons.applicable_date | weekDay}}</td>
+      <td>{{cons.min_temp | number:'1.0-0' }} °c</td>
+      <td>{{cons.max_temp | number:'1.0-0' }} °c</td>
+      <td>{{cons.the_temp | number:'1.0-0' }} °c</td>
+      <td>
+        <img [src]="weatherService.iconUrl + cons.weather_state_abbr + '.ico'" alt="" style="width:32px">
+      </td>
+    </tr>
+
+  </table>
+  <loader
+    [dataCount] = '1'
+    tagName = "weatherData"
+  >
+
+  </loader>
+</ul>
