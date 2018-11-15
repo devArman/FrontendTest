@@ -7,7 +7,7 @@ export class WeatherService {
 
   public iconUrl = 'https://www.metaweather.com/static/img/weather/ico/';
 
-  private beckendUrl: string = 'http://localhost/test.php';
+  private beckendUrl: string = 'https://www.metaweather.com/api/location/';
 
   public loader:boolean = !!1;
   public weatherDataCount:number = 0;
@@ -22,14 +22,14 @@ export class WeatherService {
 
   public getWeatherByKeyword( keyword ): Promise<any> {
     return this.http.get(
-      this.beckendUrl + '?command=search&keyword=' + keyword,
+      this.beckendUrl + '/search/?query=' + keyword,
       this.authHeader())
       .toPromise();
   }
   public getWeatherById( id:number ) : Observable<any>
   {
-     return this.http.get(
-      this.beckendUrl + '?command=location&woeid=' + id,
+    return this.http.get(
+      this.beckendUrl  + id,
       this.authHeader())
 
   }
@@ -38,10 +38,15 @@ export class WeatherService {
 
     let params:any = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json;q=0.9,*/*;q=0.8'
+      'Accept': 'application/json;q=0.9,*/*;q=0.8',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods':'GET',
+      'Access-Control-Allow-Origin': '*'
     };
+    const headers = new HttpHeaders(params);
 
 
-    return { headers: new HttpHeaders(params) };
+    console.log(headers)
+    return { headers: headers };
   }
 }
