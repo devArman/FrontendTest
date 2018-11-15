@@ -27,7 +27,7 @@ export class LoaderDirective implements OnInit, OnDestroy, OnChanges {
 
 
   constructor(
-    @Inject(DOCUMENT) private _document: any,
+    @Inject(DOCUMENT) public _document: any,
     private _el: ElementRef
   ) {
     // this._initOnClickBody = this._initOnClickBody.bind(this);

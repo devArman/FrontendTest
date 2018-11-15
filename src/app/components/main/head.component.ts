@@ -14,7 +14,7 @@ export class HeadComponent   implements OnInit {
 
   constructor(
     public router: Router,
-    private weatherService:WeatherService,
+    public weatherService:WeatherService,
     public route: ActivatedRoute
   )
   {
